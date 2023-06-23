@@ -115,9 +115,33 @@
 					</div>
 					<div class="flex mt-2">
 						<ul class="width li-index">
-                            <li class="mt-2">
-								<i class="fa-solid fa-car i-red"></i>
-                            </li>
+							{% for service in service|slice(0,6) %}
+								<li class="mt-2">
+									<i class="fa-solid fa-car i-red"></i>
+									&thinsp;
+									{{ service.name }}</li>
+							{% endfor %}
+							{% for service in service|slice(12,6) %}
+								<li class="mt-2">
+									<i class="fa-solid fa-car i-red"></i>
+									&thinsp;
+									{{ service.name }}</li>
+							{% endfor %}
+						</ul>
+
+						<ul class="width li-index">
+							{% for service in service|slice(6,6) %}
+								<li class="mt-2">
+									<i class="fa-solid fa-car i-red"></i>
+									&thinsp;
+									{{ service.name }}</li>
+							{% endfor %}
+							{% for service in service|slice(18,6) %}
+								<li class="mt-2">
+									<i class="fa-solid fa-car i-red"></i>
+									&thinsp;
+									{{ service.name }}</li>
+							{% endfor %}
 						</ul>
 					</div>
 				</div>
