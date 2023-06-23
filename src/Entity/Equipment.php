@@ -22,6 +22,14 @@ class Equipment
     #[Assert\NotBlank(message:'Veulliez renseigner un nom')]
     private ?string $name = null;
 
+    #[ORM\ManyToMany(targetEntity: Car::class, mappedBy: 'equipment')]
+    private Collection $cars;
+
+    public function __construct()
+    {
+        $this->cars = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -39,7 +47,30 @@ class Equipment
         return $this;
     }
 
+    /**
+     * @return Collection<int, Car>
+     */
+    public function getCars(): Collection
+    {
+        return $this->cars;
+    }
 
+    public function addCar(Car $car): self
+    {
+        if (!$this->cars->contains($car)) {
+            $this->cars->add($car);
+            $car->addEquipment($this);
+        }
 
+        return $this;
+    }
 
+    public function removeCar(Car $car): self
+    {
+        if ($this->cars->removeElement($car)) {
+            $car->removeEquipment($this);
+        }
+
+        return $this;
+    }
 }
