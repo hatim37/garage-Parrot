@@ -8,7 +8,9 @@ use App\Entity\PropertySearch;
 use App\Form\CarType;
 use App\Form\PropertySearchType;
 use App\Repository\CarRepository;
+use App\Repository\HourlyRepository;
 use App\Repository\ImagesRepository;
+use App\Repository\InformationRepository;
 use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +24,8 @@ class CarController extends AbstractController
     
 
     #[Route('/voiture', name: 'car.index')]
-    public function index(CarRepository $repository, Request $request): Response
+    public function index(CarRepository $repository, Request $request,
+     InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
     {
       //On créer le formulaire de recherche
       $search = new PropertySearch();
@@ -53,6 +56,11 @@ class CarController extends AbstractController
           ]);
       }
 
+
+      //repository pour afficher les variables dans le footer
+        $informationRepository = $informationRepository->findAll();
+        $hourlyRepository = $hourlyRepository->findAll();
+
       //si on a une requete classique
       return $this->render('pages/car/index.html.twig', [
           'car' => $car,
@@ -60,13 +68,16 @@ class CarController extends AbstractController
           'limit'=> $limit,
           'page' => $page,
           'form'=> $form->createView(),
+          'information' => $informationRepository,
+          'horaire' => $hourlyRepository,
       ]);
 
     }
 
 
     #[Route('/voiture/creation', name: 'car.new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager, PictureService $pictureService): Response
+    public function new(Request $request, EntityManagerInterface $manager, PictureService $pictureService,
+      InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
     {
         $car = new Car();
         $form = $this->createForm(CarType::class, $car);
@@ -100,14 +111,22 @@ class CarController extends AbstractController
             return $this->redirectToRoute('car.index');
         }
 
+        //repository pour afficher les variables dans le footer
+        $informationRepository = $informationRepository->findAll();
+        $hourlyRepository = $hourlyRepository->findAll();
+
         return $this->render('pages/car/new.html.twig', [
             'form' => $form->createView(),
+            'information' => $informationRepository,
+            'horaire' => $hourlyRepository,
         ]);
     }
 
     
+
     #[Route('/voiture/edition/{id}', name:'car.edit', methods: ['GET', 'POST'])]
-    public function edit(car $car, Request $request, EntityManagerInterface $manager, PictureService $pictureService, ImagesRepository $imagesRepository): Response 
+    public function edit(car $car, Request $request, EntityManagerInterface $manager, PictureService $pictureService,
+      InformationRepository $informationRepository, HourlyRepository $hourlyRepository, ImagesRepository $imagesRepository): Response 
     {
 
         $image = $imagesRepository->RemoveAllImageCar($car->getId());
@@ -143,13 +162,17 @@ class CarController extends AbstractController
             return $this->redirectToRoute('car.index');
         }
 
+        //repository pour afficher les variables dans le footer
+        $informationRepository = $informationRepository->findAll();
+        $hourlyRepository = $hourlyRepository->findAll();
+
         return $this->render('pages/car/edit.html.twig', [
             'form' => $form->createView(),
             'car' => $car,
+            'information' => $informationRepository,
+            'horaire' => $hourlyRepository,
         ]);
     }
-
-    
 
     #[Route('/voiture/suppression/{id}', name: 'car.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Car $car,
@@ -187,7 +210,6 @@ class CarController extends AbstractController
     }
 
 
-
     #[Route('/voiture/suppression/image/{id}', name: 'car.delete_image', methods: ['DELETE'])]
     public function deleteImage(EntityManagerInterface $manager, PictureService $pictureService, Images $image, Request $request): JsonResponse
     {
@@ -215,14 +237,23 @@ class CarController extends AbstractController
 
 
     #[Route('/voiture/{id}', name: 'car.show', methods: ['GET'])]
-    public function show(car $car): Response
+    public function show(car $car, InformationRepository $repository,
+     HourlyRepository $hourlyRepository): Response
     {
         
+        //repository pour afficher les variables dans le footer
+        $hourlyRepository = $hourlyRepository->findAll();
+        $information = $repository->findAll();
+
         return $this->render('pages/car/show.html.twig', [
-            'car' => $car
+            'car' => $car,
+            'information' => $information,
+            'horaire' => $hourlyRepository,
         ]);
     }
 
 }
+
+
 
 

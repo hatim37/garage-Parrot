@@ -472,7 +472,7 @@ input::placeholder {
 
   /*----------------FOOTER ---------------------------------*/
 
-.footer {
+  .footer {
     background-color: var(--color-black);
     color:var(--color-white);
     border: none;
@@ -502,7 +502,7 @@ input::placeholder {
   
   .footer__made {
     border: none;
-    
+    border-top: 1px solid var(--color-red-light);
     font-size: 0.8rem;
   }
   
@@ -513,7 +513,51 @@ input::placeholder {
   .footer__made a:hover{
     color:var(--color-red-light);
   }
-
+  
+  .horaire {
+    margin: 40px 0px;
+  }
+  
+  .horaire p, .coordonne p, .plan ul{
+    font-size: 17px;
+  }
+  
+  .suivez span i{
+    font-size: 25px;
+  }
+  
+  .suivez {
+    margin-bottom: 40px;
+  }
+  
+  .fa-instagram {
+    margin: 0px 30px;
+  }
+  
+  .plan a{
+    text-decoration: none;
+    color: var(--color-white);
+  }
+  
+  .plan a:hover{
+    color: var(--color-red-light);
+  }
+  
+  .plan ul {
+    padding: 0px;
+  }
+  
+  .coordonne p{
+    margin-bottom: 8px;
+  }
+  
+  .flex-footer-container{
+    display: block;
+  }
+  
+  .width-footer {
+    width: 100%;
+  }
   
   .flex-footer {
     display: block;
@@ -526,6 +570,29 @@ input::placeholder {
     .footer {
       font-size: 1rem;
       text-align: start;
+    }
+  
+   
+  
+    .horaire {
+      margin: 0px;
+    }
+  
+    .flex-footer-container{
+      display: flex;
+    }
+  
+    .width-footer-container {
+      width: 50%;
+    }
+  
+    .width-footer-container-60
+     {
+      width: 60%;
+    }
+  
+    .width-footer-container-40 {
+      width: 40%;
     }
   
   }
@@ -543,3 +610,8 @@ input::placeholder {
     }
    
   }
+  
+  
+  
+  
+  
