@@ -95,7 +95,7 @@ class CarType extends AbstractType
             ->add('images', FileType::class, [
                 'label' => false,
                 'multiple' => true,
-                'required' => $options['required'],
+                'required' => false,
                 'mapped' => false,
             ])
             ->add('type', TextType::class, [
@@ -229,12 +229,12 @@ class CarType extends AbstractType
             ]);
 
 
-            //On utilise un écouteur d'évenement pour ajouter une verification au moment de la modification d'une annonce.
-            // Celle-ci va vérifier qu'une ou des images sont déjà associé à une annonce, sinon une contrainte empêche la soumission du formulaire
+            // On utilise un écouteur d'événement pour ajouter une vérification au moment de la modification d'une annonce
+            // Celle-ci va vérifier qu'une où des images sont déjà associées à une annonce, sinon une contrainte empêche la soumission du formulaire
             $builder->get('title')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
                 $form = $event->getForm();
                 
-                //on récupere l'id de l'annonce
+                //on récupère l'id de l'annonce
                 $images = $event->getForm()->getParent()->getData()->getId();
 
                 //On lance une recherche pour récupèrer tous les images associé à l'annonce
@@ -256,11 +256,12 @@ class CarType extends AbstractType
                         new Assert\Callback([
                             // Ici $value correspond à la valeur du champ "images",
                             'callback' => static function ($value, ExecutionContextInterface $context) use ($data) {
-                                //On vérifie si $data(résulat des images déjà associé) ou $value(valeur actuelle du champ "images") sont vide ?
+                                //On vérifie si $data ou $value sont vide ?
                                 if ($data || $value) {
                                     return;
-                                    //si vide alors erreur 
+                                    //si des images sont déjà fourni on peut soumettre le formulaire 
                                 } else {
+                                    //si vide alors erreur et contrainte de fournir une image
                                     $context
                                         ->buildViolation("Vous devez ajouter une image")
                                         ->atPath('[images]')

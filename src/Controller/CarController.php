@@ -126,29 +126,32 @@ class CarController extends AbstractController
 
     #[Route('/voiture/edition/{id}', name:'car.edit', methods: ['GET', 'POST'])]
     public function edit(car $car, Request $request, EntityManagerInterface $manager, PictureService $pictureService,
-      InformationRepository $informationRepository, HourlyRepository $hourlyRepository, ImagesRepository $imagesRepository): Response 
+      InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response 
     {
 
-        $image = $imagesRepository->RemoveAllImageCar($car->getId());
-            
-        $form = $this->createForm(CarType::class, $car,  ['required' => $image ? false : true]);
+        $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            //on récupère les images
+
+            //on récupère le contenu du champ images
             $images = $form->get('images')->getData();
-            
-            foreach($images as $image){
-                //on definit le dossier de destination
-                $folder = 'car';
 
-                //on appelle le service d'ajout
-                $fichier = $pictureService->add($image, $folder);
+            //si de nouvelle images ont été téléchargées, on enregistre les images
+            if ($images) {
+                foreach($images as $image){
+                    //on definit le dossier de destination
+                    $folder = 'car';
 
-                $img = new Images();
-                $img->setName($fichier);
-                $car->addImage($img);
+                    //on appelle le service d'ajout
+                    $fichier = $pictureService->add($image, $folder);
+
+                    $img = new Images();
+                    $img->setName($fichier);
+                    $car->addImage($img);
+                }
             }
-            
+
+            //on enregistre le formulaire
             $car = $form->getData();
 
             $manager->persist($car);
@@ -180,8 +183,7 @@ class CarController extends AbstractController
     {
         
         //On récupère le nom des images qui appartienent à cette annonce
-        $image = $imagesRepository->RemoveAllImageCar($car->getId());
-        //dd($image);
+        $image = $imagesRepository->AllImageCar($car->getId());
 
         //On boucle sur le resultat qui est une arrayCollection 
         foreach($image as $ligne){
@@ -189,7 +191,7 @@ class CarController extends AbstractController
             foreach($ligne as $cle=>$valeur){
             //On appelle le service PictureService a qui on passe le nom de l'image
                 if($pictureService->delete($valeur, 'car')){
-                //On supprime l'image de la base de données
+                //On supprime l' ou les images de la base de données
                 $manager->remove($images);
                 $manager->flush();
                 }

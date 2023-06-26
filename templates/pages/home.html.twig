@@ -4,6 +4,22 @@
 	{{ parent() }} - Accueil
 {% endblock %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<!-- Start : Import bootsrap-->
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>	
+	<!-- End : Import bootsrap-->
+
+	<!-- Start : Import libraire Commentaire-->
+ 	<link href="https://srmahour.github.io/custom-testimonial-slider-and-blog/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://srmahour.github.io/custom-testimonial-slider-and-blog/css/slick.css" rel="stylesheet">
+	<!-- End : Import libraire Commentaire-->
+
+	<!-- Start : Import icone-->
+	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+	<!-- End : Import icone-->
+	<link href="/assets/styles/testimonies.css" rel="stylesheet"/>
+{% endblock %}
 
 {% block body %}
 
@@ -163,13 +179,27 @@
 	</section>
 	<!-- End : Fifth section -->
 
+
 	<!-- Start : Sixth section -->
 		
-				<section class="section-6 text-center pt-4">
-					<h2 class=" pt-4">Avis Client</h2>
-				</section>
+	<section>
+		{% include "pages/comment/_comment.html.twig" %}
+	</section>
 				
+	<!-- End : Sixth section -->
 
+{% endblock %}
 
+{% block javascripts %}
+{{ parent() }}
+	<!-- Start : Import script bootsrap-->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+	<!-- End : Import bootsrap-->
+	
+	<!-- Start : Import script libraire Commentaire -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js'></script>
+	<!-- Start : Import script libraire Commentaire -->
+
+	<script src="{{asset('assets/js/testimonies.js')}}"></script>
 {% endblock %}
 

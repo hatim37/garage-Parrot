@@ -174,6 +174,9 @@ class CarRepository extends ServiceEntityRepository
         return $data->getQuery()->getSingleScalarResult();
     }
 
+    
+
+
 //    /**
 //     * @return Car[] Returns an array of Car objects
 //     */

@@ -39,6 +39,26 @@ class ImagesRepository extends ServiceEntityRepository
         }
     }
 
+     /**
+     * Cette function permet de retourner les images appartenant à une voiture
+     *
+     * @param [type] $id
+     * @return mixed
+     */
+    public function AllImageCar($id){
+
+        $data = $this->createQueryBuilder('i')
+          ->select('i.name')
+          ->Join('i.car', 'c')
+          ->where('c.id IN (:id)')
+          ->setParameter('id', $id)
+          ->getQuery()
+          ->getResult();
+
+          return $data;
+        
+    }
+
 //    /**
 //     * @return Images[] Returns an array of Images objects
 //     */
