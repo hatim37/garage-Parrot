@@ -62,15 +62,16 @@
 					{{ form_row(form.isApproved, { 'attr':{'class':'isApproved'} }) }}
 				</div>
 
-				<div class=" col-lg-8 col-md-12 mb-5 pb-5">
-					<div class="form-group width d-flex justify-content-between">
-						{{ form_label(form.submit) }}
-						{{ form_widget(form.submit) }}
-						<div class="d-flex align-items-end">
-							<a href="{{ path('home.index') }}" class="btn btn-primary">Retour</a>
-						</div>
-					</div>
+				<div class="col-md-8 d-flex">
+				<div class="form-group mb-3">
+					{{ form_label(form.submit) }}
+					{{ form_widget(form.submit) }}
 				</div>
+				
+				<div class="form-group mb-3 flex align-items-end">
+					<a href="{{ path('home.index') }}" class=" btn btn-primary ms-3 ms-lg-5 mt-4">Retour à la page d'accueil</a>
+				</div>
+			</div>
 
 		</div>
 		{{ form_rest(form) }}
