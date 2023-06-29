@@ -8,6 +8,7 @@ use App\Repository\HourlyRepository;
 use App\Repository\InformationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,16 @@ class HourlyController extends AbstractController
 {
     
 
+    /**
+     * Cette fonction permet d'afficher la liste des horaires
+     *
+     * @param HourlyRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @param InformationRepository $informationRepository
+     * @return Response
+     */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/horaire', name: 'hourly.index')]
     public function index(HourlyRepository $repository, PaginatorInterface $paginator,
      Request $request, InformationRepository $informationRepository): Response
@@ -38,6 +49,17 @@ class HourlyController extends AbstractController
     }
 
 
+    /**
+     * Cette fonction permet de modifier une horaire
+     *
+     * @param Hourly $hourly
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/horaire/edition/{id}', name: 'hourly.edit', methods: ['GET', 'POST'])]
     public function edit(Hourly $hourly, Request $request, EntityManagerInterface $manager,
       InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response

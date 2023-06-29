@@ -9,6 +9,7 @@ use App\Repository\HourlyRepository;
 use App\Repository\InformationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class EquipmentController extends AbstractController
 {
     
-
+    /**
+     * Cette fonction permet d'afficher la liste des options
+     *
+     * @param EquipmentRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/equipement', name: 'equipment.index')]
     public function index( EquipmentRepository $repository, PaginatorInterface $paginator, Request $request,
       InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
@@ -41,8 +52,19 @@ class EquipmentController extends AbstractController
     }
 
 
+    /**
+     * Cette fonction permet de créer une nouvelle option
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/equipement/nouveau', name: 'equipment.new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager, InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
+    public function new(Request $request, EntityManagerInterface $manager,
+     InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
     {
         $equipment = new Equipment();
         $form = $this->createForm(EquipmentType::class, $equipment, ['labelButton' => 'Créer une option']);
@@ -72,7 +94,19 @@ class EquipmentController extends AbstractController
             'horaire' => $hourlyRepository,
         ]);
     }
+    
 
+    /**
+     * Cette fonction permet de modifier une option
+     *
+     * @param equipment $equipment
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/equipement/edition/{id}', name: 'equipment.edit', methods: ['GET', 'POST'])]
     public function edit(equipment $equipment, Request $request, EntityManagerInterface $manager,
      InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
@@ -105,6 +139,15 @@ class EquipmentController extends AbstractController
         ]);
     }
 
+    
+    /**
+     * Cette fonction permet de supprimer une option
+     *
+     * @param EntityManagerInterface $manager
+     * @param equipment $equipment
+     * @return Response
+     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/equipement/suppression/{id}', name: 'equipment.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, equipment $equipment): Response
     {

@@ -13,6 +13,7 @@ use App\Repository\ImagesRepository;
 use App\Repository\InformationRepository;
 use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,16 @@ class CarController extends AbstractController
 {
     
 
+    
+    /**
+     * Cette fonction permet d'afficher la liste des voitures selon les critères de recherches
+     *
+     * @param CarRepository $repository
+     * @param Request $request
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
     #[Route('/voiture', name: 'car.index')]
     public function index(CarRepository $repository, Request $request,
      InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
@@ -75,6 +86,18 @@ class CarController extends AbstractController
     }
 
 
+    
+    /**
+     * Cette fonction permet de créer une nouvelle annonce
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param PictureService $pictureService
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/voiture/creation', name: 'car.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager, PictureService $pictureService,
       InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
@@ -124,6 +147,19 @@ class CarController extends AbstractController
 
     
 
+    
+    /**
+     * Cette fonction permet de modifier une annonce
+     *
+     * @param car $car
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param PictureService $pictureService
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/voiture/edition/{id}', name:'car.edit', methods: ['GET', 'POST'])]
     public function edit(car $car, Request $request, EntityManagerInterface $manager, PictureService $pictureService,
       InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response 
@@ -177,6 +213,18 @@ class CarController extends AbstractController
         ]);
     }
 
+    
+    /**
+     * Cette fonction permet de supprimer une annonce
+     *
+     * @param EntityManagerInterface $manager
+     * @param Car $car
+     * @param ImagesRepository $imagesRepository
+     * @param Images $images
+     * @param PictureService $pictureService
+     * @return Response
+     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/voiture/suppression/{id}', name: 'car.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Car $car,
      ImagesRepository $imagesRepository, Images $images, PictureService $pictureService): Response
@@ -212,6 +260,17 @@ class CarController extends AbstractController
     }
 
 
+    
+    /**
+     * Cette fonction permet de supprimer l'image d'une annonce
+     *
+     * @param EntityManagerInterface $manager
+     * @param PictureService $pictureService
+     * @param Images $image
+     * @param Request $request
+     * @return JsonResponse
+     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/voiture/suppression/image/{id}', name: 'car.delete_image', methods: ['DELETE'])]
     public function deleteImage(EntityManagerInterface $manager, PictureService $pictureService, Images $image, Request $request): JsonResponse
     {
@@ -237,7 +296,15 @@ class CarController extends AbstractController
         return new JsonResponse(['error' => 'Erreur de suppression'], 400);
     }
 
-
+    
+    /**
+     * Cette fonction permet d'afficher une annonce
+     *
+     * @param car $car
+     * @param InformationRepository $repository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
     #[Route('/voiture/{id}', name: 'car.show', methods: ['GET'])]
     public function show(car $car, InformationRepository $repository,
      HourlyRepository $hourlyRepository): Response

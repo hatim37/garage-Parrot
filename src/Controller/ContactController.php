@@ -20,6 +20,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
     
+    /**
+     * Cette fonction permet d'afficher la liste des messages
+     *
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @param ContactRepository $commentRepository
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @return Response
+     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/contact', name: 'contact.index')]
     public function index(InformationRepository $informationRepository,
      HourlyRepository $hourlyRepository, ContactRepository $commentRepository, Request $request, 
@@ -46,6 +57,15 @@ class ContactController extends AbstractController
 
     
 
+    /**
+     * Cete fonction permet d'envoyer un message
+     *
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('/contact/creation', name: 'contact.new', methods: ['GET', 'POST'])]
     public function new(InformationRepository $informationRepository,
      HourlyRepository $hourlyRepository, Request $request, 
@@ -79,7 +99,18 @@ class ContactController extends AbstractController
          ]);
     }
 
+
     
+    /**
+     * Cette fonction permet d'envoyer un message à partir d'une annonce
+     *
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param Car $car
+     * @return Response
+     */
     #[Route('/contact/creation/{id}', name: 'contact-car.new', methods: ['GET', 'POST'])]
     public function newAnnonce(InformationRepository $informationRepository,
      HourlyRepository $hourlyRepository, Request $request, 
@@ -123,7 +154,15 @@ class ContactController extends AbstractController
     }
 
 
-
+    
+    /**
+     * Cette fonction permet de supprimer un message
+     *
+     * @param EntityManagerInterface $manager
+     * @param Contact $contact
+     * @return Response
+     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/contact/suppression/{id}', name: 'contact.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Contact $contact): Response
     {
@@ -141,7 +180,16 @@ class ContactController extends AbstractController
     }
 
 
-
+    
+    /**
+     * Cette fonction permet de consulter les détails d'un message
+     *
+     * @param Contact $contact
+     * @param InformationRepository $repository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/contact/{id}', name: 'contact.show', methods: ['GET'])]
     public function show(Contact $contact, InformationRepository $repository,
      HourlyRepository $hourlyRepository): Response

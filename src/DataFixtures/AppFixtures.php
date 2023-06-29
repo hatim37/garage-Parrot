@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Car;
 use App\Entity\Equipment;
 use App\Entity\Images;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -27,6 +28,18 @@ class AppFixtures extends Fixture
 
        
 
+        //Users
+        $users = [];
+
+        $admin = new User();
+        $admin->setName('Administrateur')
+            ->setFirstName('admin')
+            ->SetEmail('admin@garage.fr')
+            ->setRoles(['ROLE_ADMIN'])
+            ->setPlainPassword('password');
+
+        $users[] = $admin;
+        $manager->persist($admin);
         
 
         $manager->flush();

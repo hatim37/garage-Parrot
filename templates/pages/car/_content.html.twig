@@ -50,12 +50,13 @@
 						€</h4>
 					<h6>Garantie 3 MOIS OU 5000 KM</h6>
 
-
 				</div>
 				<div class="d-flex justify-content-evenly m-4">
 					<a href="{{ path('car.show', { id: car.id }) }}" class="btn btn-primary">Consulter</a>
+					{% if app.user %}
 					<a href="{{ path('car.edit', { id: car.id }) }}" class="btn btn-primary ms-lg-1">Modifier</a>
 					<a href="{{ path('car.delete', { id: car.id }) }}" class="btn btn-danger ms-lg-1">Supprimer</a>
+					{% endif %}
 				</div>
 			</div>
 		</div>

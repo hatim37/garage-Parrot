@@ -13,33 +13,52 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="{{ path('car.index') }}">Véhicule d'occasion
-					</a>
+					<a class="nav-link" href="{{ path('car.index') }}">Véhicule d'occasion</a>
+				</li>
+				{% if app.user %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('equipment.index') }}">Équipements</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="{{ path('equipment.index') }}">Équipements
-					</a>
+					<a class="nav-link" href="{{ path('comment.index') }}">Commentaires</a>
+				</li>
+				{% if 'ROLE_ADMIN' in app.user.roles %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('service.index') }}">Services</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="{{ path('service.index') }}">Services
-					</a>
+					<a class="nav-link" href="{{ path('hourly.index') }}">Horaires</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="{{ path('hourly.index') }}">Horaires
-					</a>
+					<a class="nav-link" href="{{ path('information.index') }}">Informations</a>
+				</li>
+				{% endif %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('contact.index') }}">Contact</a>
+				</li>
+				<li class="nav-item dropdown">
+          			<a class="nav-link px-3 px-lg-2 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						{{ app.user.fullName }}</a>
+          			<div class="dropdown-menu">
+            			<a class="dropdown-item" href="{{ path('user.edit', {id: app.user.id}) }}">Modifier mes informations</a>
+            			<a class="dropdown-item" href="{{ path('user.edit.password', {id: app.user.id}) }}">Changer mon mot de passe</a>
+            			<div class="dropdown-divider"></div>
+                    		{% if 'ROLE_ADMIN' in app.user.roles %}
+								<a class="dropdown-item" href="{{ path('user.index') }}">Gérer les utilisateurs</a>
+								<div class="dropdown-divider"></div>
+							{% endif %}
+            			<a class="dropdown-item" href="{{ path('security.logout') }}">Déconnexion</a>
+          			</div>
+        		</li>
+				{% else %}
+
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('contact.new') }}">Contact</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="{{ path('information.index') }}">Informations
-					</a>
+					<a class="nav-link px-3 px-lg-2" href="{{ path('security.login') }}"><i class="fa-solid fa-right-to-bracket icon" style="color: #ffffff;"></i>&nbsp; Connexion</a>	
 				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="{{ path('comment.index') }}">Commentaires
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="{{ path('contact.index') }}">Contact
-					</a>
-				</li>
+				{% endif %}
 			</ul>
 		</div>
 	</div>

@@ -9,6 +9,7 @@ use App\Repository\InformationRepository;
 use App\Repository\ServiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class ServiceController extends AbstractController
 {
 
-    
+
+    /**
+     * Cette fonction permet d'afficher la liste des services
+     *
+     * @param ServiceRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/service', name: 'service.index', methods: ['GET'])]
     public function index(ServiceRepository $repository, PaginatorInterface $paginator, Request $request,
      InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
@@ -39,6 +51,17 @@ class ServiceController extends AbstractController
         ]);
     }
 
+
+    /**
+     * Cette fonction permet de créer un nouveau service
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/service/nouveau', name: 'service.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager, 
     InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
@@ -73,7 +96,18 @@ class ServiceController extends AbstractController
     }
 
 
-    
+
+    /**
+     * Cette fonction permet de modifier un service
+     *
+     * @param Service $service
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param InformationRepository $informationRepository
+     * @param HourlyRepository $hourlyRepository
+     * @return Response
+     */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/service/edition/{id}', name: 'service.edit', methods: ['GET', 'POST'])]
     public function edit(Service $service, Request $request, EntityManagerInterface $manager,
      InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
@@ -106,6 +140,15 @@ class ServiceController extends AbstractController
         ]);
     }
 
+
+    /**
+     * CEtte fonction permet de supprimer un service
+     *
+     * @param EntityManagerInterface $manager
+     * @param Service $service
+     * @return Response
+     */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/service/suppression/{id}', name: 'service.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Service $service): Response
     {

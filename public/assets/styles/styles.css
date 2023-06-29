@@ -1,10 +1,9 @@
 :root {
   --color-red-dark: #D92332;
   --color-red: #D94350;
-  --color-red-light: #D9777F;
   --color-black: #262526;
   --color-white: #F2F2F2;
-  --color-yellow: #ffbe00;
+  --color-yellow: #FFBE00;
   --color-green: green;
  
   --font-barlow: 'Barlow', sans-serif;
@@ -52,6 +51,7 @@ a{
 
 .btn-primary {
   background: var(--color-black) !important;
+  border: none !important;
 }
 
 .btn-danger {
@@ -585,7 +585,7 @@ color: var(--color-white);
 
 .footer__made {
 border: none;
-border-top: 1px solid var(--color-red-light);
+border-top: 1px solid var(--color-red);
 font-size: 0.8rem;
 }
 
@@ -594,7 +594,7 @@ margin-bottom: 0px;
 }
 
 .footer__made a:hover{
-color:var(--color-red-light);
+color:var(--color-yellow);
 }
 
 .horaire {
@@ -623,7 +623,7 @@ color: var(--color-white);
 }
 
 .plan a:hover{
-color: var(--color-red-light);
+color: var(--color-red);
 }
 
 .plan ul {
