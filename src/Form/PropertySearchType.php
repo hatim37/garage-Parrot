@@ -7,6 +7,7 @@ use App\Entity\PropertySearch;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -111,6 +112,12 @@ class PropertySearchType extends AbstractType
                     'class' => 'form-control mt-4',
                 ],
             ])
+            ->add('reset', ResetType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary mt-4',
+                ],
+                'label'=> 'Réinitialiser'
+                ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4',

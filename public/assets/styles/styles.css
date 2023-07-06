@@ -148,10 +148,10 @@ width: 141px;
 .page-no-active {
 display: none;
 }
-
+/*
 #reference {
 padding-top: 70px;
-}
+}*/
 
 #reference:target {
 display: block;
