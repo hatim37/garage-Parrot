@@ -61,7 +61,7 @@ class UserController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/utilistateur/creation', name: 'user.new', methods:['GET', 'POST'])]
     /**
-     * Cette fonction permet de créer
+     * Cette fonction permet de créer un utilisateur
      *
      * @param Request $request
      * @param EntityManagerInterface $manager
@@ -126,7 +126,7 @@ class UserController extends AbstractController
             return strcmp($role, $tableau);
         })) > 0;
 
-        //si le rôle n'est pas Admin alors on verifie si l'utilisateur est bien le propriétaire du compte à modifier
+        //si le rôle n'est pas "Admin" alors on vérifie si l'utilisateur est bien le propriétaire du compte à modifier
         if ($result == false) {
             if(!$this->getUser()) {
                 return $this->redirectToRoute('security.login');

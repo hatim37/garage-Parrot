@@ -36,7 +36,7 @@ class ContactController extends AbstractController
      HourlyRepository $hourlyRepository, ContactRepository $commentRepository, Request $request, 
      PaginatorInterface $paginator): Response
     {
-        //On récupère les données de l'entité Commentaire et on utilise la pagination pour l'affichage
+        //On récupère la liste des messages et on utilise la pagination pour l'affichage
         $contact = $paginator->paginate(
             $commentRepository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
@@ -116,7 +116,7 @@ class ContactController extends AbstractController
      HourlyRepository $hourlyRepository, Request $request, 
      EntityManagerInterface $manager, Car $car): Response
     {
-        //On récupère les données de l'annonce depuis sont formulaire
+        //On récupère les données de l'annonce
         $formCar = $this->createForm(CarType::class, $car);
         //On récupère le titre de l'annonce
         $car = $formCar->getData()->getTitle();

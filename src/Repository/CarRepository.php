@@ -41,6 +41,14 @@ class CarRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Cette fonction permet de s'afficher et de filtrer les résultats d'une recherche
+     *
+     * @param PropertySearch $search
+     * @param [type] $page
+     * @param [type] $limit
+     * @return void
+     */
     public function findBySearch(PropertySearch $search, $page, $limit)
     {
 
@@ -123,7 +131,7 @@ class CarRepository extends ServiceEntityRepository
     }
 
     /**
-     * cette method permet de calculer le nombre de résultat selon les recherches éffectuées
+     * Cette fonction permet de calculer le nombre de résultats selon les recherches effectuées
      *
      * @param PropertySearch $search
      * @return mixed

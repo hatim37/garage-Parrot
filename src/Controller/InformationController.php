@@ -51,6 +51,7 @@ class InformationController extends AbstractController
         ]);
     }
 
+    
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/information/edition/{id}', name: 'information.edit', methods: ['GET', 'POST'])]
     /**

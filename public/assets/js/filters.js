@@ -10,8 +10,8 @@ window.onload = () => {
 
     const FiltersForm = document.querySelector("#filters");
 
-    //soumission du formulaire en ajax avec la methode "click" sur bouton
-    //on boucle sur les bouton de soumission des champs du formulaires
+    //Soumission du formulaire en ajax avec la methode "click" sur bouton
+    //on boucle sur les boutons de soumission des champs du formulaire
     document.querySelectorAll("#valide").forEach(input => {
         //const input = document.querySelector("......");
         input.addEventListener("click", () => {
@@ -50,8 +50,8 @@ window.onload = () => {
     });
 
 
-    //Même opération de soumission du formulaire en ajax mais avec sur les champs select et avec la methode "change"
-    //on boucle sur les select du formulaire
+    //Même opération de soumission du formulaire en ajax mais sur les champs select et avec la methode "change"
+    //On boucle sur les "select" du formulaire
     document.querySelectorAll("#sortBy").forEach(select => {
         //const input = document.querySelector("#valide");
         select.addEventListener("change", () => {

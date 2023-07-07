@@ -35,7 +35,7 @@ class CommentController extends AbstractController
      HourlyRepository $hourlyRepository, CommentRepository $commentRepository, Request $request, 
      PaginatorInterface $paginator): Response
     {
-        //On récupère les données de l'entité Commentaire et on utilise la pagination pour l'affichage
+        //On récupère les liste des commentaires et on utilise la pagination pour l'affichage
         $comment = $paginator->paginate(
             $commentRepository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/

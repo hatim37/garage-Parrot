@@ -239,7 +239,7 @@ class CarController extends AbstractController
             foreach($ligne as $cle=>$valeur){
             //On appelle le service PictureService a qui on passe le nom de l'image
                 if($pictureService->delete($valeur, 'car')){
-                //On supprime l' ou les images de la base de données
+                //On supprime l'image ou les images de la base de données
                 $manager->remove($images);
                 $manager->flush();
                 }
@@ -275,7 +275,7 @@ class CarController extends AbstractController
     public function deleteImage(EntityManagerInterface $manager, PictureService $pictureService, Images $image, Request $request): JsonResponse
     {
 
-        //On récupère le contenu dela requête
+        //On récupère le contenu de la requête
         $data = json_decode($request->getContent(), true);
 
         if($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])){

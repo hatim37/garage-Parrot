@@ -40,7 +40,7 @@ class ServiceController extends AbstractController
             6 /*limit per page*/
         );
 
-        //repository pour afficher les variables dans le footer
+        //Repository pour afficher les variables dans le footer
         $informationRepository = $informationRepository->findAll();
         $hourlyRepository = $hourlyRepository->findAll();
 
@@ -142,7 +142,7 @@ class ServiceController extends AbstractController
 
 
     /**
-     * CEtte fonction permet de supprimer un service
+     * Cette fonction permet de supprimer un service
      *
      * @param EntityManagerInterface $manager
      * @param Service $service

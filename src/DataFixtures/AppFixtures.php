@@ -28,20 +28,20 @@ class AppFixtures extends Fixture
 
        
 
-        //Users
-        $users = [];
+    //   //Users
+    //   $users = [];
 
-        $admin = new User();
-        $admin->setName('Administrateur')
-            ->setFirstName('admin')
-            ->SetEmail('admin@garage.fr')
-            ->setRoles(['ROLE_ADMIN'])
-            ->setPlainPassword('password');
+    //   $admin = new User();
+    //   $admin->setName('Administrateur')
+    //       ->setFirstName('admin')
+    //       ->SetEmail('admin@garage.fr')
+    //       ->setRoles(['ROLE_ADMIN'])
+    //       ->setPlainPassword('password');
 
-        $users[] = $admin;
-        $manager->persist($admin);
-        
+    //   $users[] = $admin;
+    //   $manager->persist($admin);
+    //   
 
-        $manager->flush();
+    //   $manager->flush();
    }
 }

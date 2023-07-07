@@ -30,7 +30,7 @@ class SecurityController extends AbstractController
     InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
     {
 
-        //repository pour afficher les variables dans le footer
+        //Repository pour afficher les variables dans le foote
         $informationRepository = $informationRepository->findAll();
         $hourlyRepository = $hourlyRepository->findAll();
  
@@ -44,7 +44,7 @@ class SecurityController extends AbstractController
 
     
     /**
-     * Cette fonction permet de déconnecter
+     * Cette fonction permet de se déconnecter
      *
      * @return void
      */

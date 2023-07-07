@@ -229,15 +229,15 @@ class CarType extends AbstractType
             ]);
 
 
-            // On utilise un écouteur d'événement pour ajouter une vérification au moment de la modification d'une annonce
-            // Celle-ci va vérifier qu'une où des images sont déjà associées à une annonce, sinon une contrainte empêche la soumission du formulaire
+            // On utilise un écouteur d'événements pour ajouter une vérification au moment de la modification d'une annonce
+            // Celle-ci va vérifier qu'une ou des images sont déjà associées à une annonce, sinon une contrainte empêche la soumission du formulaire
             $builder->get('title')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
                 $form = $event->getForm();
                 
                 //on récupère l'id de l'annonce
                 $images = $event->getForm()->getParent()->getData()->getId();
 
-                //On lance une recherche pour récupèrer tous les images associé à l'annonce
+                //On lance une recherche pour récupérer toutes les images associées à l'annonce
                 $data = $this->imagesRepository->createQueryBuilder('i')
                     ->select('i.name')
                     ->Join('i.car', 'c')
@@ -246,7 +246,7 @@ class CarType extends AbstractType
                     ->getQuery()
                     ->getResult();
                     
-                //On remplace le champ "images" en ajoutant une contrainte CallBack, 
+                //On remplace le champ "images" en ajoutant une contrainte CallBack 
                 $form->getParent()->add('images', FileType::class, [
                     'label' => false,
                     'multiple' => true,
@@ -259,9 +259,9 @@ class CarType extends AbstractType
                                 //On vérifie si $data ou $value sont vide ?
                                 if ($data || $value) {
                                     return;
-                                    //si des images sont déjà fourni on peut soumettre le formulaire 
+                                    //si des images sont déjà fournie on peut soumettre le formulaire 
                                 } else {
-                                    //si vide alors erreur et contrainte de fournir une image
+                                    //si vide, alors une erreur de contrainte pour fournir une image
                                     $context
                                         ->buildViolation("Vous devez ajouter une image")
                                         ->atPath('[images]')
