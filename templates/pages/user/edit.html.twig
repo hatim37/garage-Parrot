@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container body-height">
 		<h1 class="mt-4">Modification d'un utilisateur</h1>
 
         {% for message in app.flashes('warning') %}
@@ -12,7 +12,9 @@
         	{{ message }}</div>
     	{% endfor %}
 
-		{{ form(form) }}
+		<form action="" class="col-md-4">
+			{{ form(form) }}
+		</form>
 
 		
 

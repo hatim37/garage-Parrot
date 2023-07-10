@@ -3,7 +3,7 @@
 Ce projet est une application créée dans le cadre d'une évaluation de fin de formation de développeur web.
 Il a été conçu avec le framework Symfony 6.3 et php 8.1.
 Cette application est un site vitrine qui met en avant les prestations d'un garage.
-Les informations affichées sur le site sont modifiable grâce à un gestionnaire de contenu.
+Les informations affichées sur le site sont modifiables grâce à un gestionnaire de contenu.
 
 ----------------------
 
@@ -66,4 +66,4 @@ Les informations affichées sur le site sont modifiable grâce à un gestionnair
 
 ------------------------------
 
-*Mes remerciements à tous les formateurs de studi-school qui déploient beaucoup d'efforts pour nous fournir des cours de qualité et nous transmettre les savoir-faires pour réussir notre projet professionnel*
+*Mes remerciements à tous les formateurs de studi-school qui déploient beaucoup d'efforts pour nous fournir des cours de qualité et nous transmettre les savoir-faires pour réussir notre projet professionnel.*

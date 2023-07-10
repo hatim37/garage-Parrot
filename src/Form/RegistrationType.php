@@ -69,7 +69,7 @@ class RegistrationType extends AbstractType
             'attr' => [
                 'class' => 'form-control select2',
             ],
-            'label' => 'rôle',
+            'label' => 'Rôle',
             'label_attr' => [
                 'class' => 'form-label  mt-4'
             ],
