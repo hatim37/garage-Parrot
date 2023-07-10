@@ -66,4 +66,8 @@ Les informations affichées sur le site sont modifiables grâce à un gestionnai
 
 ------------------------------
 
+<<<<<<< HEAD
 *Mes remerciements à tous les formateurs de studi-school qui déploient beaucoup d'efforts pour nous fournir des cours de qualité et nous transmettre les savoir-faires pour réussir notre projet professionnel.*
+=======
+*Mes remerciements à tous les formateurs de studi-school qui déploient beaucoup d'efforts pour nous fournir des cours de qualité et nous transmettre les savoir-faires pour réussir notre projet professionnel*
+>>>>>>> eebfac59bfa681728ffd9af037bc9ff5f80b9931
