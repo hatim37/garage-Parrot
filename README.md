@@ -3,7 +3,7 @@
 Ce projet est une application créée dans le cadre d'une évaluation de fin de formation de développeur web.
 Il a été conçu avec le framework Symfony 6.3 et php 8.1.
 Cette application est un site vitrine qui met en avant les prestations d'un garage.
-Les informations affichées sur le site sont modifiable grâce à un gestionnaire de contenu.
+Les informations affichées sur le site sont modifiables grâce à un gestionnaire de contenu.
 
 ----------------------
 
