@@ -58,8 +58,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_ADMIN')]
-    #[Route('/utilistateur/creation', name: 'user.new', methods:['GET', 'POST'])]
+    
     /**
      * Cette fonction permet de créer un utilisateur
      *
@@ -69,7 +68,9 @@ class UserController extends AbstractController
      * @param HourlyRepository $hourlyRepository
      * @return Response
      */
-    public function registration(Request $request, EntityManagerInterface $manager,
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/utilistateur/creation', name: 'user.new', methods:['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $manager,
      InformationRepository $informationRepository, HourlyRepository $hourlyRepository): Response
     {
         $user = new User();
